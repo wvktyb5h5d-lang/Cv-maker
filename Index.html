@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My CV Maker</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f3f4f6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #222;
+    }
+
+    .form-box {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #222;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #444;
+    }
+
+    .cv {
+      background: white;
+      padding: 35px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    .cv h2 {
+      margin-bottom: 5px;
+      font-size: 30px;
+    }
+
+    .cv h3 {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+      margin-top: 25px;
+    }
+
+    .contact {
+      color: #555;
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .form-box,
+      .print-button {
+        display: none;
+      }
+
+      .cv {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Professional CV Maker</h1>
+
+  <div class="form-box">
+
+    <label>Full Name</label>
+    <input id="name" placeholder="Enter your name">
+
+    <label>Email</label>
+    <input id="email" placeholder="Enter your email">
+
+    <label>Phone</label>
+    <input id="phone" placeholder="Enter your phone number">
+
+    <label>Education</label>
+    <textarea id="education" placeholder="Example: Bachelor's in Computer Science"></textarea>
+
+    <label>Skills</label>
+    <textarea id="skills" placeholder="Example: MS Office, Communication, Photoshop"></textarea>
+
+    <label>Experience</label>
+    <textarea id="experience" placeholder="Describe your work experience"></textarea>
+
+    <button onclick="createCV()">Create My CV</button>
+
+  </div>
+
+  <div class="cv" id="cv">
+
+    <h2 id="cvName">Your Name</h2>
+
+    <div class="contact">
+      <span id="cvEmail">your@email.com</span> |
+      <span id="cvPhone">0000000000</span>
+    </div>
+
+    <h3>Education</h3>
+    <p id="cvEducation">Your education will appear here.</p>
+
+    <h3>Skills</h3>
+    <p id="cvSkills">Your skills will appear here.</p>
+
+    <h3>Experience</h3>
+    <p id="cvExperience">Your experience will appear here.</p>
+
+  </div>
+
+  <button class="print-button" onclick="window.print()">
+    Download / Print CV
+  </button>
+
+</div>
+
+<script>
+
+function createCV() {
+
+  document.getElementById("cvName").innerText =
+    document.getElementById("name").value || "Your Name";
+
+  document.getElementById("cvEmail").innerText =
+    document.getElementById("email").value || "your@email.com";
+
+  document.getElementById("cvPhone").innerText =
+    document.getElementById("phone").value || "0000000000";
+
+  document.getElementById("cvEducation").innerText =
+    document.getElementById("education").value || "Your education will appear here.";
+
+  document.getElementById("cvSkills").innerText =
+    document.getElementById("skills").value || "Your skills will appear here.";
+
+  document.getElementById("cvExperience").innerText =
+    document.getElementById("experience").value || "Your experience will appear here.";
+}
+
+</script>
+
+</body>
+</html>
