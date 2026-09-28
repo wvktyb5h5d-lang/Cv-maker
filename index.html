@@ -1,1 +1,144 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Professional CV Maker</title><style>*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}body{background:#f0f2f5;padding:15px}.container{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:20px}@media(max-width:800px){.container{grid-template-columns:1fr}}.form-box,.cv-box{background:#fff;padding:25px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.1)}h2{margin-bottom:15px;color:#1a73e8}label{font-weight:700;display:block;margin-top:12px;margin-bottom:4px}input,textarea{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin-bottom:8px}textarea{resize:vertical;min-height:70px}.btn{background:#1a73e8;color:#fff;border:none;padding:12px;width:100%;border-radius:8px;font-size:16px;cursor:pointer;margin-top:15px}.btn:hover{background:#0d62d1}#cvPreview{border:1px solid #ddd;padding:25px;min-height:500px}#cvPreview h1{font-size:28px;color:#222}#cvPreview h3{color:#1a73e8;margin-top:18px;border-bottom:1px solid #eee;padding-bottom:4px}#cvPreview p{white-space:pre-wrap;font-size:15px;line-height:1.6}@media print{body *{visibility:hidden}#cvPreview,#cvPreview *{visibility:visible}#cvPreview{position:absolute;left:0;top:0;width:100%;border:none;box-shadow:none}.no-print{display:none!important}}</style></head><body><div class="container"><div class="form-box no-print"><h2>Create Your CV</h2><label>Full Name</label><input id="name" placeholder="John Doe" oninput="updateCV()"><label>Email</label><input id="email" placeholder="john@email.com" oninput="updateCV()"><label>Phone</label><input id="phone" placeholder="+92 300 1234567" oninput="updateCV()"><label>Address</label><input id="address" placeholder="Quetta, Pakistan" oninput="updateCV()"><label>Professional Summary</label><textarea id="summary" oninput="updateCV()"></textarea><label>Education</label><textarea id="education" oninput="updateCV()"></textarea
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Maker</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+h1 {
+  text-align: center;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 15px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 17px;
+}
+
+#cv {
+  display: none;
+  margin-top: 25px;
+  padding: 25px;
+  border: 1px solid #ddd;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #cv, #cv * {
+    visibility: visible;
+  }
+
+  #cv {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 90%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Professional CV Maker</h1>
+
+<label>Full Name</label>
+<input id="name" placeholder="Your Full Name">
+
+<label>Email</label>
+<input id="email" placeholder="Your Email">
+
+<label>Phone Number</label>
+<input id="phone" placeholder="Your Phone Number">
+
+<label>Education</label>
+<textarea id="education" placeholder="Your Education"></textarea>
+
+<label>Skills</label>
+<textarea id="skills" placeholder="Your Skills"></textarea>
+
+<label>Experience</label>
+<textarea id="experience" placeholder="Your Experience"></textarea>
+
+<button onclick="createCV()">Create My CV</button>
+
+<div id="cv">
+  <h1 id="cvName"></h1>
+  <p><b>Email:</b> <span id="cvEmail"></span></p>
+  <p><b>Phone:</b> <span id="cvPhone"></span></p>
+
+  <h2>Education</h2>
+  <p id="cvEducation"></p>
+
+  <h2>Skills</h2>
+  <p id="cvSkills"></p>
+
+  <h2>Experience</h2>
+  <p id="cvExperience"></p>
+
+  <button onclick="window.print()">Download / Print CV</button>
+</div>
+
+</div>
+
+<script>
+function createCV() {
+  document.getElementById("cvName").innerText =
+    document.getElementById("name").value;
+
+  document.getElementById("cvEmail").innerText =
+    document.getElementById("email").value;
+
+  document.getElementById("cvPhone").innerText =
+    document.getElementById("phone").value;
+
+  document.getElementById("cvEducation").innerText =
+    document.getElementById("education").value;
+
+  document.getElementById("cvSkills").innerText =
+    document.getElementById("skills").value;
+
+  document.getElementById("cvExperience").innerText =
+    document.getElementById("experience").value;
+
+  document.getElementById("cv").style.display = "block";
+}
+</script>
+
+</body>
+</html>
