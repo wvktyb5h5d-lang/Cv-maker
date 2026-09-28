@@ -1,54 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CV Maker - Fixed</title>
 <style>
-body{font-family:Arial;background:#f1f5f9;margin:0;padding:15px}
-.box{max-width:1000px;margin:auto;display:flex;gap:15px;flex-wrap:wrap}
-.left,.right{background:#fff;padding:20px;border-radius:12px;flex:1;min-width:320px;box-shadow:0 4px 10px rgba(0,0,0,0.1)}
-input,textarea{width:100%;padding:12px;margin:7px 0;border:1px solid #ccc;border-radius:8px;box-sizing:border-box}
-button{width:100%;padding:14px;background:#000;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer}
-#cvPreview{border-top:5px solid #000}
+* { box-sizing: border-box; margin:0; padding:0; font-family: Arial, sans-serif; }
+body { background: #f0f2f5; padding: 15px; }
+.container { max-width: 1100px; margin: auto; display: flex; gap: 20px; flex-wrap: wrap; }
+.form-box, .cv-box { background: white; padding: 20px; border-radius: 10px; flex: 1; min-width: 300px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+h2 { margin-bottom: 15px; color: #1a73e8; }
+label { font-weight: bold; display: block; margin-top: 12px; font-size: 14px; }
+input, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; }
+textarea { resize: vertical; }
+.btn { background: #1a73e8; color: white; border: none; padding: 12px 20px; border-radius: 6px; margin-top: 20px; width: 100%; font-size: 16px; cursor: pointer; }
+.btn:hover { background: #0d62d1; }
+#cvPreview { border: 1px solid #ddd; padding: 25px; line-height: 1.6; }
+#cvPreview h1 { font-size: 28px; color: #222; }
+#cvPreview h3 { color: #1a73e8; margin-top: 15px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+#cvPreview p { white-space: pre-wrap; font-size: 14px; }
+
+/* YEHI FIX HAI - PRINT KA MASLA KHATAM */
+@media print {
+  body * { visibility: hidden; }
+  #cvPreview, #cvPreview * { visibility: visible; }
+  #cvPreview { position: absolute; left: 0; top: 0; width: 100%; border: none; padding: 0; }
+  .no-print { display: none !important; }
+}
 </style>
 </head>
 <body>
-<div class="box">
-<div class="left">
-<h2>Make Your CV</h2>
-<input type="text" id="name" placeholder="Full Name" onkeyup="createCV()">
-<input type="text" id="title" placeholder="Job Title" onkeyup="createCV()">
-<input type="text" id="phone" placeholder="Phone Number" onkeyup="createCV()">
-<input type="text" id="email" placeholder="Email" onkeyup="createCV()">
-<textarea id="about" placeholder="About Yourself" onkeyup="createCV()"></textarea>
-<textarea id="edu" placeholder="Education" onkeyup="createCV()"></textarea>
-<textarea id="skills" placeholder="Skills" onkeyup="createCV()"></textarea>
-<textarea id="exp" placeholder="Experience" onkeyup="createCV()"></textarea>
-<button onclick="window.print()">Download / Print CV</button>
+
+<div class="container">
+  <div class="form-box no-print">
+    <h2>Apni Details Likho</h2>
+    <label>Full Name</label><input type="text" id="name" oninput="updateCV()" placeholder="Muhammad Ali">
+    <label>Job Title</label><input type="text" id="job" oninput="updateCV()" placeholder="Electrician">
+    <label>Phone</label><input type="text" id="phone" oninput="updateCV()" placeholder="0300-1234567">
+    <label>Email</label><input type="text" id="email" oninput="updateCV()" placeholder="ali@gmail.com">
+    <label>About Yourself</label><textarea id="about" oninput="updateCV()" placeholder="Mehnati aur imandar..."></textarea>
+    <label>Education</label><textarea id="edu" oninput="updateCV()" placeholder="Matric - Quetta"></textarea>
+    <label>Skills</label><textarea id="skills" oninput="updateCV()" placeholder="Electric Work, Wiring"></textarea>
+    <label>Experience</label><textarea id="exp" oninput="updateCV()" placeholder="2 Years Experience"></textarea>
+    <button class="btn" onclick="window.print()">Download / Print CV</button>
+  </div>
+
+  <div class="cv-box">
+    <div id="cvPreview">
+      <h1 id="pName">Your Name</h1>
+      <p id="pJob" style="color:#666; font-weight:bold;">Your Job Title</p>
+      <p id="pContact">Phone | Email</p>
+      <h3>About Me</h3><p id="pAbout">About will appear here</p>
+      <h3>Education</h3><p id="pEdu">Education will appear here</p>
+      <h3>Skills</h3><p id="pSkills">Skills will appear here</p>
+      <h3>Experience</h3><p id="pExp">Experience will appear here</p>
+    </div>
+  </div>
 </div>
-<div class="right" id="cvPreview">
-<h1 id="pName">Your Name</h1>
-<h3 id="pTitle" style="color:gray;">Your Job Title</h3>
-<p><span id="pPhone"></span> | <span id="pEmail"></span></p>
-<hr>
-<p id="pAbout"></p>
-<h3>Education</h3><p id="pEdu"></p>
-<h3>Skills</h3><p id="pSkills"></p>
-<h3>Experience</h3><p id="pExp"></p>
-</div>
-</div>
+
 <script>
-function createCV(){
-document.getElementById('pName').innerText = document.getElementById('name').value || 'Your Name';
-document.getElementById('pTitle').innerText = document.getElementById('title').value || 'Your Job Title';
-document.getElementById('pPhone').innerText = document.getElementById('phone').value;
-document.getElementById('pEmail').innerText = document.getElementById('email').value;
-document.getElementById('pAbout').innerText = document.getElementById('about').value;
-document.getElementById('pEdu').innerText = document.getElementById('edu').value;
-document.getElementById('pSkills').innerText = document.getElementById('skills').value;
-document.getElementById('pExp').innerText = document.getElementById('exp').value;
-}
-</script>
-</body>
-</html>
+function updateCV(){
+  document.getElementById('pName').innerText = document.getElementById('name').
